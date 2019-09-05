@@ -1,19 +1,20 @@
 #include <iostream>
+#include "ArgumentManager.h"
+#include <fstream>
 #include <string>
 
-template<typename Type>
+using namespace std;
+
 struct Node{
-    Type data;
+    string name;
+    int index;
     Node* next;
 };
 
-class list{
-private:
-public:
-};
+int main(int argc, char *argv[]) {
+    ArgumentManager am(argc,argv);
+    const string in = am.get("input");
+    const string out = am.get("output");
 
-
-int main() {
-    std::cout << "NO U" << std::endl;
     return 0;
 }
