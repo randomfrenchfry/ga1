@@ -11,10 +11,65 @@ struct Node{
     Node* next;
 };
 
-int main(int argc, char *argv[]) {
-    ArgumentManager am(argc,argv);
-    const string in = am.get("input");
-    const string out = am.get("output");
+class list{
+private:
+    Node*head;
+    Node*tail;
+public:
+    list();
+    void createNode(string value);
+    void display();
+};
 
+int main() {
+    //Commented so I can do local testing
+    //ADD TO MAIN PARAMETERS: int argc, char *argv[]
+    //ArgumentManager am(argc,argv);
+    //const string in = am.get("input");
+    //const string out = am.get("output");
+    string fileName;
+    cin >> fileName;
+    ifstream file;
+    file.open(fileName);
+
+    list list1;
+    string value; //data for Node
+
+    //THIS GRABS THE FIRST NAME OF VERY PERSON - IDK IF WE NEED THE LAST NAME TOO FOR THOSE THAT HAVE IT
+    //IF SO, ADAPT SO THAT IT INCLUDES LAST NAME
+    while(getline(file,value)){
+        int stringshort = value.find(",");
+        value = value.substr(0,stringshort);
+
+        list1.createNode(value);
+    }
+
+    list1.display();
+    file.close();
     return 0;
+}
+list::list(){
+    head = NULL;
+    tail = NULL;
+}
+void list::createNode(string value) {
+    Node*p = new Node;
+    p->name = value;
+    p->next = NULL;
+    if(head == NULL){
+        head = p;
+        tail = p;
+        p = NULL;
+    } else{
+        tail->next = p;
+        tail = p;
+    }
+}
+void list::display() {
+    Node*cu = new Node;
+    cu = head;
+    while(cu!=NULL){
+        cout << "NODE DATA " << cu->name << endl;
+        cu = cu->next;
+    }
 }
