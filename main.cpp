@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 
+
+
 using namespace std;
 
 struct Node{
@@ -36,11 +38,9 @@ int main() {
 
     //THIS GRABS THE FIRST NAME OF VERY PERSON - IDK IF WE NEED THE LAST NAME TOO FOR THOSE THAT HAVE IT
     //IF SO, ADAPT SO THAT IT INCLUDES LAST NAME
-    int count = 0;
     while(getline(file,value)){
         int stringshort = value.find(",");
         value = value.substr(0,stringshort);
-        count +=1;
         list1.createNode(value);
     }
     list1.bsortlist();
@@ -78,8 +78,9 @@ void list::bsortlist() {
     Node*ptr = head;
     string temp;
 
-    while(ptr->next != 0){
-        if(ptr->name > ptr->next->name){
+    while(ptr->next != NULL){
+        if(ptr->name.compare(ptr->next->name) > 0){
+        //if(ptr->name > ptr->next->name){
             temp = ptr->next->name;
             ptr->next->name = ptr->name;
             ptr->name = temp;
