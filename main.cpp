@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
         if(player.substr(player.length()-1,player.length()) == "\r"){ // getline keeps the heckin carrige return so we gotta trim that
             player = player.substr(0,player.length()-1);
         }
-        outfile << "index of " << player << ": " << list1.indexof(player) << endl;
+        outfile << player << ": " << list1.indexof(player) << endl;
     }
     cfile.close();
     outfile.close();
