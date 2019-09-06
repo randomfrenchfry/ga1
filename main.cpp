@@ -30,10 +30,12 @@ int main() {
     //const string in = am.get("input");
     //const string out = am.get("output");
     string fileName;
+
+    //THIS IS TO TEST LOCALLY/////////////////////////////////
     cin >> fileName;
     ifstream file;
     file.open(fileName);
-
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     list list1;
     string value; //data for Node
 
