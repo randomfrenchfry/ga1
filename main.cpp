@@ -13,6 +13,7 @@ struct Node{
 };
 class list{
 private:
+    int size;
     Node*head;
     Node*tail;
 public:
@@ -49,6 +50,7 @@ int main() {
     return 0;
 }
 list::list(){
+    size = 0;
     head = NULL;
     tail = NULL;
 }
@@ -64,6 +66,7 @@ void list::createNode(string value) {
         tail->next = p;
         tail = p;
     }
+    size += 1;
 }
 void list::display() {
     Node*cu = new Node;
@@ -74,17 +77,18 @@ void list::display() {
     }
 }
 void list::bsortlist() {
-    //FIX BSORT SO THAT IT- PROBLEM: THEY ARE NOT IN ASCENDING ORDER EVEN AFTER THIS
-    Node*ptr = head;
     string temp;
-
-    while(ptr->next != NULL){
-        if(ptr->name.compare(ptr->next->name) > 0){
-        //if(ptr->name > ptr->next->name){
-            temp = ptr->next->name;
-            ptr->next->name = ptr->name;
-            ptr->name = temp;
+//BUBBLE SORT
+    for(int i=0;i<size;i++) {
+        Node*ptr = head; //Reset the pointer to head every time so it can run through it again
+        while (ptr->next != NULL) {
+            if (ptr->name.compare(ptr->next->name) > 0) {
+                //if(ptr->name > ptr->next->name){
+                temp = ptr->next->name;
+                ptr->next->name = ptr->name;
+                ptr->name = temp;
+            }
+            ptr = ptr->next; // move ptr
         }
-        ptr = ptr->next;
     }
 }
