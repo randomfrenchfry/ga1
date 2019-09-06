@@ -74,7 +74,7 @@ void list::display() {
     }
 }
 void list::bsortlist() {
-    //FIX BSORT SO THAT IT SWAPS THE VALUES CORRECTLY
+    //FIX BSORT SO THAT IT- PROBLEM: THEY ARE NOT IN ASCENDING ORDER EVEN AFTER THIS
     Node*ptr = head;
     string temp;
 
