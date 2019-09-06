@@ -24,54 +24,52 @@ public:
     int indexof(string name);
 };
 
-int main() {
-    //Commented so I can do local testing
-    //ADD TO MAIN PARAMETERS: int argc, char *argv[]
-    //ArgumentManager am(argc,argv);
-    //const string in = am.get("input");
-    //const string out = am.get("output");
-    //const string cmd = am.get("command");
-    string fileName;
+int main(int argc, char *argv[]) {
+    
+    ArgumentManager am(argc,argv);
+    const string in = am.get("input");
+    const string out = am.get("output");
+    const string cmd = am.get("command");
 
     // THIS IS TO TEST LOCALLY/////////////////////////////////
-    cout << "Input Filename: ";
-    cin >> fileName;
-    ifstream file;
-    file.open(fileName);
+    //cout << "Input Filename: ";
+    //cin >> fileName;
+    //ifstream file;
+    //file.open(fileName);
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ifstream infile;
+    infile.open(in);
     list list1;
     string value; //data for Node
 
     //THIS GRABS THE FIRST NAME OF VERY PERSON - IDK IF WE NEED THE LAST NAME TOO FOR THOSE THAT HAVE IT
     //IF SO, ADAPT SO THAT IT INCLUDES LAST NAME
-    while(getline(file,value)){
+    while(getline(infile,value)){
         int stringshort = value.find(",");
         value = value.substr(0,stringshort);
         list1.createNode(value);
     }
     list1.bsortlist();
-    list1.display();
-    file.close();
+    //list1.display();
+    infile.close();
     
-    string comdname = "";
-    cout << "Comand file name:";
-    cin >> comdname;
+    //string comdname = "";
+    //cout << "Comand file name:";
+    //cin >> comdname;
     ifstream cfile;
     ofstream outfile;
-    cfile.open(comdname);
-    outfile.open("output.txt");
+    cfile.open(cmd);
+    outfile.open(out);
+
     string player = "";
     while(getline(cfile,player)){
         if(player.substr(player.length()-1,player.length()) == "\r"){ // getline keeps the heckin carrige return so we gotta trim that
             player = player.substr(0,player.length()-1);
         }
-        outfile << "index of "; 
-        outfile << player;
-        outfile << ": ";
-        outfile << list1.indexof(player) << endl;
+        outfile << "index of " << player << ": " << list1.indexof(player) << endl;
     }
     cfile.close();
-
+    outfile.close();
 
     return 0;
 }
