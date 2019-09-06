@@ -21,6 +21,7 @@ public:
     void createNode(string value);
     void display();
     void bsortlist();
+    int indexof(string name);
 };
 
 int main() {
@@ -31,7 +32,7 @@ int main() {
     //const string out = am.get("output");
     string fileName;
 
-    //THIS IS TO TEST LOCALLY/////////////////////////////////
+    // THIS IS TO TEST LOCALLY/////////////////////////////////
     cin >> fileName;
     ifstream file;
     file.open(fileName);
@@ -92,5 +93,20 @@ void list::bsortlist() {
             }
             ptr = ptr->next; // move ptr
         }
+    }
+}
+int list::indexof(string name){
+    Node* cur = head; //start at head and look down
+    string curname = cur->name;
+    int place = 0;
+    while(place < size && curname != name){
+        place++;
+        cur = cur->next;
+        curname = cur->name;
+    }
+    if (place == size){
+        return -1;
+    }else{
+        return place;
     }
 }
