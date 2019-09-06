@@ -30,9 +30,11 @@ int main() {
     //ArgumentManager am(argc,argv);
     //const string in = am.get("input");
     //const string out = am.get("output");
+    //const string cmd = am.get("command");
     string fileName;
 
     // THIS IS TO TEST LOCALLY/////////////////////////////////
+    cout << "Input Filename: ";
     cin >> fileName;
     ifstream file;
     file.open(fileName);
@@ -50,6 +52,27 @@ int main() {
     list1.bsortlist();
     list1.display();
     file.close();
+    
+    string comdname = "";
+    cout << "Comand file name:";
+    cin >> comdname;
+    ifstream cfile;
+    ofstream outfile;
+    cfile.open(comdname);
+    outfile.open("output.txt");
+    string player = "";
+    while(getline(cfile,player)){
+        if(player.substr(player.length()-1,player.length()) == "\r"){ // getline keeps the heckin carrige return so we gotta trim that
+            player = player.substr(0,player.length()-1);
+        }
+        outfile << "index of "; 
+        outfile << player;
+        outfile << ": ";
+        outfile << list1.indexof(player) << endl;
+    }
+    cfile.close();
+
+
     return 0;
 }
 list::list(){
@@ -99,14 +122,15 @@ int list::indexof(string name){
     Node* cur = head; //start at head and look down
     string curname = cur->name;
     int place = 0;
-    while(place < size && curname != name){
+    while(place < size-1 && curname != name){
+        //cout << place << "not " << "~" << curname << "~" << endl;
         place++;
         cur = cur->next;
         curname = cur->name;
     }
-    if (place == size){
-        return -1;
-    }else{
+    if (curname == name){ 
         return place;
+    }else{ // this catches if name is not in list
+        return -1;
     }
 }
