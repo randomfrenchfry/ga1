@@ -25,7 +25,12 @@ public:
 };
 
 int main(int argc, char *argv[]) {
-    
+
+    if(argc < 2){
+        cout << "Invalid arguments" << endl;
+        return 1;
+    }
+
     ArgumentManager am(argc,argv);
     const string in = am.get("input");
     const string out = am.get("output");
@@ -62,11 +67,18 @@ int main(int argc, char *argv[]) {
     outfile.open(out);
 
     string player = "";
-    while(getline(cfile,player)){
-        if(player.substr(player.length()-1,player.length()) == "\r"){ // getline keeps the heckin carrige return so we gotta trim that
-            player = player.substr(0,player.length()-1);
+    while(!cfile.eof()){
+    getline(cfile,player);
+        ////
+
+        ///
+        if (player != "") {
+            if (player.substr(player.length() - 1, player.length()) ==
+                "\r") { // getline keeps the heckin carrige return so we gotta trim that
+                player = player.substr(0, player.length() - 1);
+            }
+            outfile << player << ": " << list1.indexof(player) << endl;
         }
-        outfile << player << ": " << list1.indexof(player) << endl;
     }
     cfile.close();
     outfile.close();
